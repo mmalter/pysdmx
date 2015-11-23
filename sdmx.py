@@ -340,6 +340,10 @@ class Repository(object):
 
 
     def _codes_xml_2_0(self, flowRef):
+        # Check wether an agencyID is already present in the flowRef
+        flowRef_ = flowRef.split('_')
+        if len(flowRef_) == 1:
+            flowRef = self.agencyID + '_' + flowRef_[0]
 
         self._codes = {}
 
@@ -349,7 +353,7 @@ class Repository(object):
         description_path = ".//structure:Description"
         dimension_path = ".//structure:Dimension"
 
-        url = '/'.join([self.sdmx_url, 'KeyFamily', self.agencyID + '_' + flowRef])
+        url = '/'.join([self.sdmx_url, 'KeyFamily', flowRef])
         tree = self.query_rest_xml(url)
 
         codelists = tree.xpath(codelists_path,
