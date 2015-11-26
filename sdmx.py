@@ -381,10 +381,10 @@ class Repository(object):
 
         return self.dimensions
 
-    def _codes_xml_2_1(self, flowRef):
+    def _codes_xml_2_1(self, ressourceID):
 
         self._codes = {}
-        url = '/'.join([self.sdmx_url, 'datastructure', self.agencyID, 'DSD_' + flowRef])
+        url = '/'.join([self.sdmx_url, 'datastructure', self.agencyID, ressourceID])
         tree = self.query_rest_xml(url)
         codelists_path = ".//str:Codelists"
         codelist_path = ".//str:Codelist"
